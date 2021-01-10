@@ -1,6 +1,10 @@
 # Handshake Countdown
 
-A simple website to track historic events related to the [Handshake](https://handshake.org) Blockchain.
+A simple website to track historic events related to the [Handshake](https://handshake.org) blockchain.
+
+This consists of:
+- A Node.js Express server with Socket.io that connects to an hsd node for blockchain events
+- A React webpage that connects to the server and listens for updates
 
 ## To run
 
