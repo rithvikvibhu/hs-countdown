@@ -1,6 +1,5 @@
+/* eslint-disable no-sequences, no-unused-expressions */
 // Source: https://codepen.io/cerpow/pen/RwNaeOb
-
-'use strict';
 
 // If set to true, the user must press
 // UP UP DOWN ODWN LEFT RIGHT LEFT RIGHT A B
@@ -28,8 +27,8 @@ function confetti() {
   }, runFor);
 
   // Settings
-  var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
-    pointer = 0;
+  // var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65],
+  //   pointer = 0;
 
   var particles = 150,
     spread = 20,
@@ -114,7 +113,6 @@ function confetti() {
 
       // Find where dart lies
       for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
-        // eslint-disable-next-line no-unused-expressions
         (a = domain[i]), (b = domain[i + 1]), (interval = b - a);
         if (dart < measure + interval) {
           spline.push((dart += a - measure));
@@ -122,12 +120,10 @@ function confetti() {
         }
         measure += interval;
       }
-      // eslint-disable-next-line no-unused-expressions
       (c = dart - radius), (d = dart + radius);
 
       // Update the domain
       for (i = domain.length - 1; i > 0; i -= 2) {
-        // eslint-disable-next-line no-unused-expressions
         (l = i - 1), (a = domain[l]), (b = domain[i]);
         // c---d          c---d  Do nothing
         //   c-----d  c-----d    Move interior

@@ -42,47 +42,23 @@ function App() {
       <Header />
 
       {/* Main Text */}
-      {futureEvents.length ? (
+      {data.currentHeight ? (
         <MainText
           futureEvents={futureEvents}
           currentHeight={data.currentHeight}
         />
       ) : (
-        ''
+        <h3 className='mt-16 text-2xl text-center'>Loading...</h3>
       )}
 
       {/* Events List */}
-      {futureEvents.length ? (
+      {events.length ? (
         <Events pastEvents={pastEvents} futureEvents={futureEvents} />
       ) : (
         ''
       )}
     </div>
   );
-}
-
-function Events(props) {
-  return (
-    <div className='mt-20 w-full flex font-light'>
-      <div className='flex-1 text-center'>
-        <h5 className='mb-1 font-medium'>Past Events</h5>
-        <EventsList events={props.pastEvents} />
-      </div>
-      <div className='flex-1 text-center'>
-        <h5 className='mb-1 font-medium'>Up Next</h5>
-        <EventsList events={props.futureEvents} />
-      </div>
-    </div>
-  );
-}
-
-function EventsList(props) {
-  const eventsItems = props.events.map((event, idx) => (
-    <li key={idx}>
-      {event.name} - Block {event.height}
-    </li>
-  ));
-  return <ul>{eventsItems}</ul>;
 }
 
 function Header() {
@@ -112,6 +88,21 @@ function Header() {
 }
 
 function MainText(props) {
+  if (props.futureEvents.length === 0) {
+    return (
+      <h3 className='mt-16 text-2xl text-center'>
+        No upcoming events.{' '}
+        <a
+          href='https://github.com/rithvikvibhu/hs-countdown'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='hover:underline'
+        >
+          Add one now!
+        </a>
+      </h3>
+    );
+  }
   const blocksToNextEvent = props.futureEvents[0].height - props.currentHeight;
   let timeToNextEvent;
   if (blocksToNextEvent === 0) {
@@ -145,6 +136,30 @@ function MainText(props) {
       </h4>
     </div>
   );
+}
+
+function Events(props) {
+  return (
+    <div className='mt-20 w-full flex font-light'>
+      <div className='flex-1 text-center'>
+        <h5 className='mb-1 font-medium'>Past Events</h5>
+        <EventsList events={props.pastEvents} />
+      </div>
+      <div className='flex-1 text-center'>
+        <h5 className='mb-1 font-medium'>Up Next</h5>
+        <EventsList events={props.futureEvents} />
+      </div>
+    </div>
+  );
+}
+
+function EventsList(props) {
+  const eventsItems = props.events.map((event, idx) => (
+    <li key={idx}>
+      {event.name} - Block {event.height}
+    </li>
+  ));
+  return <ul>{eventsItems}</ul>;
 }
 
 export default App;

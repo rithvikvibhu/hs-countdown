@@ -18,7 +18,7 @@ const nodeClient = new NodeClient(nodeOptions);
 (async () => {
   // Connection and both channel subscriptions handled by opening client
   await nodeClient.open();
-  console.log('Connected.');
+  console.log('Connected to hsd.');
   const tip = await nodeClient.getTip();
   latestData.currentHeight = ChainEntry.fromRaw(tip).height;
 })();
