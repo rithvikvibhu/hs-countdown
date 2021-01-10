@@ -1,10 +1,14 @@
 # Handshake Countdown
 
 A simple website to track historic events related to the [Handshake](https://handshake.org) blockchain.
+It is currently hosted at http://countdown.rithvik/ (a better name is in reveal, will switch in a few days.)
 
 This consists of:
 - A Node.js Express server with Socket.io that connects to an hsd node for blockchain events
 - A React webpage that connects to the server and listens for updates
+
+## Add events
+The list of events is in `server/events.js`. Please create a PR to add on to this file, or [open a new issue](https://github.com/rithvikvibhu/hs-countdown/issues/new).
 
 ## To run
 
