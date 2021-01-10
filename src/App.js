@@ -8,6 +8,7 @@ dayjs.extend(require('dayjs/plugin/relativeTime'));
 
 function App() {
   const [isDark, setIsDark] = useState(false);
+  const [connected, setConnected] = useState(false);
   const [data, setData] = useState({});
   const [events, setEvents] = useState([]);
   const pastEvents = events.filter((x) => x.height < data.currentHeight);
@@ -28,12 +29,21 @@ function App() {
       console.log('events', res);
     });
 
+    socket.on('connect', () => {
+      setConnected(true);
+      console.log(socket.id);
+    });
+    socket.on('disconnect', () => {
+      setConnected(false);
+      console.log(socket.id);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
-      className='w-full min-h-screen text-white bg-blue-700'
+      className='relative w-full min-h-screen text-white bg-blue-700'
       style={{
         background: isDark
           ? 'radial-gradient(circle, rgba(6,6,6,1) 0%, rgba(22,22,22,1) 100%)'
@@ -59,6 +69,14 @@ function App() {
       ) : (
         ''
       )}
+
+      {/* Footer */}
+      <div className='absolute bottom-2 w-full text-center'>
+        Updated in real-time from a hsd node:{' '}
+        <span className={connected ? 'text-green-300' : 'text-red-300'}>
+          {connected ? 'Connected.' : 'Trying to reconnect...'}
+        </span>
+      </div>
     </div>
   );
 }
@@ -155,7 +173,7 @@ function MainText(props) {
 
 function Events(props) {
   return (
-    <div className='mt-10 w-full md:flex font-light'>
+    <div className='mt-10 pb-20 w-full md:flex font-light'>
       <div className='mt-10 flex-1 text-center'>
         <h5 className='mb-1 font-medium'>Past Events</h5>
         <EventsList events={props.pastEvents} />
