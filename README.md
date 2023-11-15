@@ -1,5 +1,9 @@
 # Handshake Countdown
 
+#### **This project is archived. A better version of this countdown is now at https://github.com/htools-org/htools-calendar.**
+
+---
+
 A simple website to track historic events related to the [Handshake](https://handshake.org) blockchain.
 It is currently hosted at http://countdown.rithvik/ (a better name is in reveal, will switch in a few days.)
 
